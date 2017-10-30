@@ -18,5 +18,6 @@ Kafka依赖Zookeeper管理自身集群（Broker、Offset、Producer、Consumer�
     此处选用Zookeeper的版本是3.4.6，此为Kafka0.9中推荐的Zookeeper版本
 
 	http://blog.csdn.net/maomao5987370/article/details/51384694
+http://www.cnblogs.com/5iTech/articles/6043224.html
 
 */

@@ -27,7 +27,7 @@ func Consumer() {
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest //初始从最新的offset开始
 	//c, err := cluster.NewConsumer(strings.Split("localhost:9092", ","), groupID, strings.Split(topics, ","), config)
 
-	c, err := cluster.NewConsumer(strings.Split("192.168.1.113:9092", ","), groupID, strings.Split(topics, ","), config)
+	c, err := cluster.NewConsumer(strings.Split("10.10.1.236:9092", ","), groupID, strings.Split(topics, ","), config)
 	if err != nil {
 		glog.Errorf("Failed open consumer: %v", err)
 		return
@@ -55,12 +55,14 @@ func Consumer() {
 // 并发量小时，可以用这种方式
 func SyncProducer() {
 	config := sarama.NewConfig()
-	//  config.Producer.RequiredAcks = sarama.WaitForAll
-	//  config.Producer.Partitioner = sarama.NewRandomPartitioner
+
+	config.Producer.RequiredAcks = sarama.WaitForAll
+	config.Producer.Partitioner = sarama.NewRandomPartitioner
+
 	config.Producer.Return.Successes = true
 	config.Producer.Timeout = 5 * time.Second
 	//p, err := sarama.NewSyncProducer(strings.Split("localhost:9092", ","), config)
-	p, err := sarama.NewSyncProducer(strings.Split("192.168.1.113:9092", ","), config)
+	p, err := sarama.NewSyncProducer(strings.Split("10.10.1.236:9092", ","), config)
 	defer p.Close()
 	if err != nil {
 		glog.Errorln(err)
@@ -86,7 +88,7 @@ func AsyncProducer() {
 	config := sarama.NewConfig()
 	config.Producer.Return.Successes = true //必须有这个选项
 	config.Producer.Timeout = 5 * time.Second
-	p, err := sarama.NewAsyncProducer(strings.Split("localhost:9092", ","), config)
+	p, err := sarama.NewAsyncProducer(strings.Split("10.10.1.236:9092", ","), config)
 	defer p.Close()
 	if err != nil {
 		return

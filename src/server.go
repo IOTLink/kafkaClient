@@ -5,8 +5,8 @@ import (
 )
 
 func main() {
-	//libs.AsyncProducer()
-	libs.SyncProducer()
+	libs.AsyncProducer()
+	//libs.SyncProducer()
 
 }
 
